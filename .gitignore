@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.venv-bake/
+.venv-cad/
+tools/*.png
+tools/frames/
+*.log

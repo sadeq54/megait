@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  body { margin: 0; background: #06060f; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<script type="importmap">
+  { "imports": {
+    "three": "https://unpkg.com/three@0.174.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.174.0/examples/jsm/"
+  } }
+</script>
+<script type="module">
+  import * as THREE from 'three'
+  import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+
+  const params = new URLSearchParams(location.search)
+  const yaw = parseFloat(params.get('yaw') || '0') // degrees
+  const file = params.get('file') || '../incoming/a1-model.glb'
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true })
+  renderer.setSize(900, 900)
+  renderer.toneMapping = THREE.NoToneMapping // ACES washes brand color
+  renderer.outputColorSpace = THREE.SRGBColorSpace
+  document.body.appendChild(renderer.domElement)
+
+  const scene = new THREE.Scene()
+  scene.background = new THREE.Color(0x06060f)
+  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 2000)
+
+  scene.add(new THREE.AmbientLight(0xffffff, 2.6))
+  const key = new THREE.DirectionalLight(0xfff2e0, 0.5)
+  key.position.set(120, 160, 200)
+  scene.add(key)
+  const rim = new THREE.DirectionalLight(0x8faaff, 0.3)
+  rim.position.set(-140, 60, -160)
+  scene.add(rim)
+
+  new GLTFLoader().load(file, (g) => {
+    const obj = g.scene
+    obj.traverse((n) => {
+      if (n.isMesh) n.material.side = THREE.FrontSide // honest visibility check
+    })
+    const box = new THREE.Box3().setFromObject(obj)
+    const c = box.getCenter(new THREE.Vector3())
+    const s = box.getSize(new THREE.Vector3()).length()
+    obj.position.sub(c)
+    obj.rotation.y = (yaw * Math.PI) / 180
+    scene.add(obj)
+    camera.position.set(0, s * 0.06, s * 1.55)
+    camera.lookAt(0, 0, 0)
+    renderer.render(scene, camera)
+    window.__done = true
+  }, undefined, (e) => { window.__err = String(e) })
+</script>
+</body>
+</html>
