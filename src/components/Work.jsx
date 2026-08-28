@@ -3,28 +3,32 @@ import { gsap, ScrollTrigger, reduceMotion } from '../lib/scrollFx.js'
 
 /* Pinned split: the title holds the left column while the cases travel
    up the right, each growing and brightening as it arrives. Case faces
-   are the generated stills (s1-s3). */
+   are live screenshots of the shipped sites; every card opens the real
+   product. */
 const CASES = [
   {
-    id: 'affiliate',
-    img: '/s1-affiliate.png',
-    title: 'Performance affiliate network',
-    body: 'Full site for a MENA and APAC affiliate network: 3D hero, pinned case stack, smooth scroll, logo pipeline.',
-    facts: ['React + GSAP + Three.js', '95+ Lighthouse'],
-  },
-  {
-    id: 'qps',
-    img: '/s2-qps.png',
-    title: 'QPS Audit',
-    body: 'Hospitality audit platform built end to end: product, front end, deployment. One developer, production traffic.',
-    facts: ['qpsaudit.com', 'Sole developer'],
+    id: 'kormzi',
+    url: 'https://kormzi.com/',
+    img: '/work/kormzi.jpg',
+    title: 'Kormzi',
+    body: 'Full brand site for a performance affiliate network serving MENA and APAC: 3D hero, pinned case studies, smooth scroll choreography.',
+    facts: ['kormzi.com', 'React + GSAP + Three.js'],
   },
   {
     id: 'gold',
-    img: '/s3-gold.png',
+    url: 'https://goldpricesarabia.com/',
+    img: '/work/gold.jpg',
     title: 'Gold Prices Arabia',
-    body: 'Bilingual market tracker on Next.js: live charts, i18n routing, SEO built for two languages at once.',
-    facts: ['goldpricesarabia.com', 'EN / AR RTL'],
+    body: 'Bilingual gold-market platform on Next.js: live pricing, i18n routing, SEO engineered for English and Arabic in parallel.',
+    facts: ['goldpricesarabia.com', 'Arabic RTL native'],
+  },
+  {
+    id: 'blk',
+    url: 'https://caffeshop-sadeq.netlify.app/',
+    img: '/work/blk.jpg',
+    title: 'BLK Coffee',
+    body: 'Cinematic scroll-film landing page for a specialty coffee brand: scroll-driven film scrubbing, pinned menu rail, editorial pacing.',
+    facts: ['Live preview', 'React + Lenis'],
   },
 ]
 
@@ -73,15 +77,20 @@ export default function Work() {
         <div className="work-pin">
           <h2 className="sec-h">Built, shipped, measured</h2>
           <p className="sec-sub">
-            Three shipped products, three different jobs. The pattern is the
-            same: one clear offer, motion with a purpose, numbers at the end.
+            Live products, not mockups. Every case below opens the real site.
           </p>
         </div>
         <div className="work-list">
           {CASES.map((c) => (
-            <article key={c.id} className="case">
+            <a
+              key={c.id}
+              className="case"
+              href={c.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <div className="case-media">
-                <img src={c.img} alt={`${c.title} artwork`} loading="lazy" decoding="async" />
+                <img src={c.img} alt={`${c.title} website`} loading="lazy" decoding="async" />
               </div>
               <div className="case-body">
                 <h3>{c.title}</h3>
@@ -92,7 +101,7 @@ export default function Work() {
                   ))}
                 </ul>
               </div>
-            </article>
+            </a>
           ))}
         </div>
       </div>
