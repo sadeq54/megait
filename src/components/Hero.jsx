@@ -35,10 +35,11 @@ export default function Hero() {
     const lenis = getLenis()
     if (lenis) lenis.stop()
     document.documentElement.classList.add('scroll-hold')
-    const ceiling = setTimeout(unlock, 10000)
+    const ceiling = setTimeout(unlock, 6500)
 
     const mobile = window.matchMedia('(max-width: 860px)').matches
     video.src = mobile ? '/film/f1-assembly-m.mp4' : '/film/f1-assembly.mp4'
+    video.playbackRate = 1.6 // 8s film plays in 5s; assembly reads snappier
     const p = video.play()
     if (p && p.catch) p.catch(unlock) // autoplay blocked: poster + free scroll
 
