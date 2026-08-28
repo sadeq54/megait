@@ -328,7 +328,7 @@ html.scroll-hold, html.scroll-hold body { overflow: hidden; }
 
 /* ---------- scrub stage (the corridor) ---------- */
 .scrub-stage { position: relative; z-index: 2; }
-.bridge-stage { height: 300vh; }
+.bridge-stage { height: 560vh; }
 .overlap { margin-top: -100dvh; }
 .scrub-sticky {
   position: sticky;
@@ -368,11 +368,68 @@ html.scroll-hold, html.scroll-hold body { overflow: hidden; }
   opacity: var(--iris-ring, 0);
   pointer-events: none;
 }
+/* captions: absolute layers inside the sticky frame, painted by the
+   film engine (opacity, --enter, --p) */
+.caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 18px;
+  padding: 0 6vw;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- service cards flying through the corridor ---------- */
+.scrub-sticky { perspective: 950px; }
+.hall-title { align-items: center; justify-content: center; }
+.hall-title .sec-h {
+  font-size: clamp(2.2rem, 5.4vw, 4rem);
+  text-shadow: 0 4px 44px rgba(6, 6, 15, 0.9);
+}
+.hall-slot {
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+}
+.hall-left { justify-content: flex-start; padding-left: 8vw; }
+.hall-right { justify-content: flex-end; padding-right: 8vw; }
+.hall-card {
+  width: min(430px, 84vw);
+  border-radius: var(--r-card);
+  border: 1px solid rgba(143, 111, 255, 0.35);
+  background: rgba(8, 8, 22, 0.72);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  box-shadow: 0 30px 90px -30px rgba(62, 107, 255, 0.5), inset 0 1px 0 rgba(242, 242, 250, 0.1);
+  transform: translateY(var(--enter, 0px))
+    scale(calc(0.66 + var(--p, 0) * 0.55))
+    rotateY(calc(var(--ry, 0deg) * (1 - var(--p, 0))));
+  transform-origin: 50% 50%;
+}
+.hall-left .hall-card { --ry: 14deg; }
+.hall-right .hall-card { --ry: -14deg; }
+.hall-media { aspect-ratio: 16 / 8; }
+.hall-media video { width: 100%; height: 100%; object-fit: cover; }
+.hall-card h3 { font-size: 1.35rem; padding: 18px 24px 0; }
+.hall-card p {
+  color: var(--ink-dim);
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 8px 24px 22px;
+}
+
 @media (max-width: 860px) {
-  .bridge-stage { height: 240vh; }
+  .bridge-stage { height: 420vh; }
+  .hall-left, .hall-right { padding: 0 4vw; }
+  .hall-left .hall-card, .hall-right .hall-card { --ry: 0deg; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .bridge-stage { height: 160vh; }
+  .bridge-stage { height: 300vh; }
 }
 
 /* ---------- proof band ---------- */

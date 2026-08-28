@@ -105,6 +105,10 @@ export default function useScrollFilm({
         const o = gate * smooth(a - fade, a, fp) * (1 - smooth(b, b + fade, fp))
         c.style.opacity = o.toFixed(3)
         if (!reduce) {
+          // progress through this caption's own window (0..1), for
+          // depth choreography: cards can travel toward the camera
+          const p = clamp01((fp - (a - fade)) / (b + fade - (a - fade)))
+          c.style.setProperty('--p', p.toFixed(4))
           c.style.setProperty('--enter', ((1 - o) * 26).toFixed(1) + 'px')
           c.style.filter = o < 0.02 ? 'blur(6px)' : 'none'
         }

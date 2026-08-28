@@ -3,7 +3,6 @@ import Loader from './components/Loader.jsx'
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
 import Proof from './components/Proof.jsx'
-import Services from './components/Services.jsx'
 import BridgeFilm from './components/BridgeFilm.jsx'
 import Work from './components/Work.jsx'
 import Process from './components/Process.jsx'
@@ -32,7 +31,6 @@ export default function App() {
       <main className="page">
         <Hero />
         <Proof />
-        <Services />
         <BridgeFilm />
         <Work />
         <Process />
