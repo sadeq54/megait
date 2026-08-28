@@ -342,7 +342,7 @@ html.scroll-hold, html.scroll-hold body { overflow: hidden; }
   inset: 0;
   background: var(--poster) center / cover no-repeat, var(--bg);
   clip-path: circle(var(--iris, 0px) at 50% 50%);
-  transform: scale(var(--iris-scale, 1.14));
+  transform: scale(var(--iris-scale, 1.05));
 }
 .scrub-stage.is-open .scrub-media { clip-path: none; transform: none; }
 .scrub-media video {

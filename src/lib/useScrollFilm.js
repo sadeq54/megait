@@ -86,7 +86,8 @@ export default function useScrollFilm({
       }
       const e = t * t * (3 - 2 * t)
       stage.style.setProperty('--iris', (e * full).toFixed(1) + 'px')
-      stage.style.setProperty('--iris-scale', (1 + (1 - e) * 0.14).toFixed(4))
+      // small zoom only: upscale past ~5% visibly softens 1080p footage
+      stage.style.setProperty('--iris-scale', (1 + (1 - e) * 0.05).toFixed(4))
       const ring = smooth(0, 0.14, t) * (1 - smooth(0.72, 1, t))
       stage.style.setProperty('--iris-ring', ring.toFixed(3))
       const open = t >= 1
