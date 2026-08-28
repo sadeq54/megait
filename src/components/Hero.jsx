@@ -80,23 +80,21 @@ export default function Hero() {
       </div>
       <div className="hero-content">
         <div className="hero-top">
-          <p className="eyebrow rise-load" style={{ '--l': 0 }}>
-            Big tech &middot; bigger possibilities
-          </p>
-          <h1 className="hero-h1 rise-load" style={{ '--l': 1 }}>
-            Landing pages that <em className="accent">move</em>.
+          <h1 className="hero-h1 rise-load" style={{ '--l': 0 }}>
+            Digital experiences
             <br />
-            And convert.
+            <em className="accent">engineered to convert.</em>
           </h1>
         </div>
         <div className="hero-bottom">
-          <p className="hero-sub rise-load" style={{ '--l': 2 }}>
-            Launch pages for apps and B2B brands. 3D heroes, scroll-driven
-            motion, 95+ Lighthouse. Fixed price, live in 7 days.
+          <p className="hero-sub rise-load" style={{ '--l': 1 }}>
+            MEGA IT designs and engineers high-performance landing pages for
+            ambitious brands. Cinematic motion, measurable speed, delivered in
+            seven business days.
           </p>
-          <div className="hero-cta rise-load" style={{ '--l': 3 }}>
-            <a className="btn btn-primary" href="#contact">Start a project</a>
-            <a className="btn btn-ghost" href="#work">See the work</a>
+          <div className="hero-cta rise-load" style={{ '--l': 2 }}>
+            <a className="btn btn-primary" href="#contact">Start your project</a>
+            <a className="btn btn-ghost" href="#work">View our work</a>
           </div>
         </div>
       </div>

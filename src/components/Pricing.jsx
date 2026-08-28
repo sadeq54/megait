@@ -65,7 +65,7 @@ export default function Pricing() {
                 ))}
               </ul>
               <p className="tier-meta">{t.meta}</p>
-              <a className="btn btn-primary tier-btn" href="#contact">Start a project</a>
+              <a className="btn btn-primary tier-btn" href="#contact">Start your project</a>
             </article>
           ))}
         </div>

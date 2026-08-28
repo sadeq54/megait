@@ -60,7 +60,7 @@ export default function Nav() {
           ))}
         </nav>
         <div className="nav-end">
-          <a className="btn btn-primary btn-nav" href="#contact">Start a project</a>
+          <a className="btn btn-primary btn-nav" href="#contact">Start your project</a>
           <button
             type="button"
             className="nav-toggle"
@@ -80,7 +80,7 @@ export default function Nav() {
             </li>
           ))}
           <li style={{ '--i': LINKS.length }}>
-            <a href="#contact" onClick={() => setOpen(false)}>Start a project</a>
+            <a href="#contact" onClick={() => setOpen(false)}>Start your project</a>
           </li>
         </ul>
         <div className="nav-sheet-foot">hello@megait.com</div>

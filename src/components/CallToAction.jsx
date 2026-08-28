@@ -40,7 +40,7 @@ export default function CallToAction() {
         </p>
         <div className="cta-actions rise">
           <a className="btn btn-primary btn-big" href="mailto:hello@megait.com?subject=Landing%20page%20project">
-            Start a project
+            Start your project
           </a>
           <p className="cta-alt">
             or write to <a href="mailto:hello@megait.com">hello@megait.com</a>

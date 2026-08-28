@@ -3,10 +3,10 @@ import { onceInView } from '../lib/reveal.js'
 
 /* Numbers that are true. No invented clients, no fake logo wall. */
 const STATS = [
-  { n: 2, suffix: '×', label: 'international 1st place' },
-  { n: 5, suffix: '', label: 'products shipped to production' },
-  { n: 95, suffix: '+', label: 'Lighthouse performance score' },
-  { n: 2, suffix: '', label: 'languages built in: EN and AR, RTL native' },
+  { n: 2, suffix: '×', label: 'international first-place awards' },
+  { n: 5, suffix: '+', label: 'products delivered to production' },
+  { n: 95, suffix: '+', label: 'Google Lighthouse performance' },
+  { n: 48, suffix: 'h', label: 'turnaround on change requests' },
 ]
 
 function Counter({ n, suffix }) {
