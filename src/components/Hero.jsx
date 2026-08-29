@@ -1,11 +1,12 @@
 import { useEffect, useRef } from 'react'
-import { getLenis } from '../lib/smoothScroll.js'
 import { useI18n } from '../lib/i18n.jsx'
 
 /* Autoplay hero, original 1080p bits: the assembly film plays once and
-   holds its final frame. The page is scroll-locked until the film ends
-   (click skips to the end), with a hard 10s ceiling and every fallback
-   path unlocking — the site is never held hostage. */
+   holds its final frame. Scroll is NEVER blocked: the film is ambient,
+   not a gate. (A scroll lock was tried and removed: Chrome defers
+   video loading in busy or background tabs, so any time-based lock
+   turns into seconds of frozen poster.) Clicking the stage skips to
+   the finished M. */
 export default function Hero() {
   const { t } = useI18n()
   const videoRef = useRef(null)
@@ -15,58 +16,25 @@ export default function Hero() {
     const video = videoRef.current
     const stage = stageRef.current
     if (!video || !stage) return
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    stage.classList.remove('film-done')
-    let unlocked = false
-    const unlock = () => {
-      if (unlocked) return
-      unlocked = true
-      const lenis = getLenis()
-      if (lenis) lenis.start()
-      document.documentElement.classList.remove('scroll-hold')
-      stage.classList.add('film-done')
-    }
-
-    if (reduce) {
-      unlock()
-      return
-    }
-
-    // hold the page while the film runs
-    const lenis = getLenis()
-    if (lenis) lenis.stop()
-    document.documentElement.classList.add('scroll-hold')
-    const ceiling = setTimeout(unlock, 6500)
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const mobile = window.matchMedia('(max-width: 860px)').matches
     video.src = mobile ? '/film/f1-assembly-m.mp4' : '/film/f1-assembly.mp4'
     video.playbackRate = 1.6 // 8s film plays in 5s; assembly reads snappier
     const p = video.play()
-    if (p && p.catch) p.catch(unlock) // autoplay blocked: poster + free scroll
+    if (p && p.catch) p.catch(() => {}) // autoplay blocked: poster stands
 
-    const onEnded = () => unlock()
-    const onError = () => unlock()
-    // click anywhere skips to the finished M
-    const onSkip = () => {
+    // click anywhere on the film skips to the finished M
+    const onSkip = (e) => {
+      if (e.target.closest('a, button')) return
       try {
         if (video.duration) video.currentTime = video.duration - 0.05
       } catch {
         /* not seekable */
       }
-      unlock()
     }
-    video.addEventListener('ended', onEnded)
-    video.addEventListener('error', onError)
     stage.addEventListener('pointerdown', onSkip)
-
-    return () => {
-      clearTimeout(ceiling)
-      video.removeEventListener('ended', onEnded)
-      video.removeEventListener('error', onError)
-      stage.removeEventListener('pointerdown', onSkip)
-      unlock()
-    }
+    return () => stage.removeEventListener('pointerdown', onSkip)
   }, [])
 
   return (
