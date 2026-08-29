@@ -1,14 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { onceInView } from '../lib/reveal.js'
+import { useI18n } from '../lib/i18n.jsx'
 
 /* Numbers that are true. No invented clients, no fake logo wall. */
-const STATS = [
-  { n: 2, suffix: '×', label: 'international first-place awards' },
-  { n: 5, suffix: '+', label: 'products delivered to production' },
-  { n: 95, suffix: '+', label: 'Google Lighthouse performance' },
-  { n: 48, suffix: 'h', label: 'turnaround on change requests' },
-]
-
 function Counter({ n, suffix }) {
   const ref = useRef(null)
   useEffect(() => {
@@ -34,10 +28,11 @@ function Counter({ n, suffix }) {
 }
 
 export default function Proof() {
+  const { t } = useI18n()
   return (
     <section className="proof">
       <div className="wrap proof-grid">
-        {STATS.map((s) => (
+        {t.stats.map((s) => (
           <div className="stat rise" key={s.label}>
             <Counter n={s.n} suffix={s.suffix} />
             <p className="stat-label">{s.label}</p>

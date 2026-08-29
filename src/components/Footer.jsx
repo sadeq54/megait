@@ -1,4 +1,7 @@
+import { useI18n } from '../lib/i18n.jsx'
+
 export default function Footer() {
+  const { t } = useI18n()
   return (
     <footer className="footer">
       <div className="wrap footer-grid">
@@ -6,21 +9,21 @@ export default function Footer() {
           <span className="logo footer-logo">
             mega<span className="logo-it">it</span><span className="logo-tld">.com</span>
           </span>
-          <p>Big tech &middot; bigger possibilities</p>
+          <p>{t.footer.tagline}</p>
         </div>
         <nav className="footer-nav" aria-label="Footer">
-          <a href="#work">Work</a>
-          <a href="#services">Services</a>
-          <a href="#process">Process</a>
-          <a href="#pricing">Pricing</a>
+          <a href="#work">{t.nav.work}</a>
+          <a href="#services">{t.nav.services}</a>
+          <a href="#process">{t.nav.process}</a>
+          <a href="#pricing">{t.nav.pricing}</a>
         </nav>
         <div className="footer-contact">
           <a href="mailto:hello@megait.com">hello@megait.com</a>
-          <p>Amman, Jordan (GMT+3)</p>
+          <p>{t.footer.location}</p>
         </div>
       </div>
       <div className="wrap footer-foot">
-        <p>&copy; 2026 MEGA IT. All rights reserved.</p>
+        <p>{t.footer.rights}</p>
       </div>
     </footer>
   )

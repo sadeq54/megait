@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react'
+import { useI18n } from '../lib/i18n.jsx'
 
 /* The beacon loop breathes behind the closing type. Muted, looped,
    poster first, paused off-screen, skipped under reduced motion. */
 export default function CallToAction() {
+  const { t } = useI18n()
   const videoRef = useRef(null)
 
   useEffect(() => {
@@ -33,17 +35,15 @@ export default function CallToAction() {
       </div>
       <div className="wrap cta-inner">
         <h2 className="cta-h rise">
-          Tell us about <em className="accent">your launch.</em>
+          {t.contact.h1} <em className="accent">{t.contact.h2}</em>
         </h2>
-        <p className="cta-sub rise">
-          If we are not the right fit, we will say so in the first five minutes.
-        </p>
+        <p className="cta-sub rise">{t.contact.sub}</p>
         <div className="cta-actions rise">
           <a className="btn btn-primary btn-big" href="mailto:hello@megait.com?subject=Landing%20page%20project">
-            Start your project
+            {t.cta}
           </a>
           <p className="cta-alt">
-            or write to <a href="mailto:hello@megait.com">hello@megait.com</a>
+            {t.contact.alt} <a href="mailto:hello@megait.com">hello@megait.com</a>
           </p>
         </div>
       </div>

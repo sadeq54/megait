@@ -1,26 +1,14 @@
-/* Name the buyer's fear, answer it plainly. */
-const QA = [
-  {
-    q: 'Will it be slow?',
-    a: '95+ Lighthouse on launch, or we fix it free. Heavy 3D ships with an automatic fallback for phones without WebGL.',
-  },
-  {
-    q: 'Will it look like a template?',
-    a: 'Every build is custom, written from a blank file. Scroll the work above and find the template.',
-  },
-  {
-    q: 'What if I do not like it?',
-    a: 'You approve the design direction before any animation is coded. Two revision rounds are inside every price.',
-  },
-]
+import { useI18n } from '../lib/i18n.jsx'
 
+/* Name the buyer's fear, answer it plainly. */
 export default function Answers() {
+  const { t } = useI18n()
   return (
     <section className="answers">
       <div className="wrap">
-        <h2 className="sec-h rise">Asked before every deal</h2>
+        <h2 className="sec-h rise">{t.answers.title}</h2>
         <dl className="qa-grid">
-          {QA.map((item) => (
+          {t.answers.qa.map((item) => (
             <div className="qa rise" key={item.q}>
               <dt>{item.q}</dt>
               <dd>{item.a}</dd>

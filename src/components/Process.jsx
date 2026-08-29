@@ -1,35 +1,14 @@
 import { useEffect, useRef } from 'react'
 import { gsap, ScrollTrigger, reduceMotion } from '../lib/scrollFx.js'
+import { useI18n } from '../lib/i18n.jsx'
 
 /* Seven days as a horizontal timeline: the section pins and vertical
    scroll pans the track sideways, station by station, while the rail
    draws itself across. Canonical horizontal-pan skeleton: pin at
    top top, end = horizontal distance, scrub. Mobile and reduced
    motion fall back to a plain vertical list. */
-const STEPS = [
-  {
-    day: '00',
-    title: 'Brief and direction',
-    body: 'One call. Your offer, your buyer, your deadline. We reply with a fixed quote the same day.',
-  },
-  {
-    day: '02',
-    title: 'Design approved',
-    body: 'You approve the design direction before a line of animation code is written.',
-  },
-  {
-    day: '05',
-    title: 'Build and motion',
-    body: 'Sections land in order of importance. Motion goes in last, where it earns attention.',
-  },
-  {
-    day: '07',
-    title: 'Live on your domain',
-    body: 'Deployed, measured, handed over. Source code and commercial rights included.',
-  },
-]
-
 export default function Process() {
+  const { t, lang } = useI18n()
   const wrapRef = useRef(null)
   const trackRef = useRef(null)
   const fillRef = useRef(null)
@@ -43,8 +22,10 @@ export default function Process() {
       ScrollTrigger.matchMedia({
         '(min-width: 901px)': () => {
           const distance = () => track.scrollWidth - window.innerWidth
+          // RTL lays the track right-to-left, so the pan flips sign
+          const rtl = document.documentElement.dir === 'rtl'
           const pan = gsap.to(track, {
-            x: () => -distance(),
+            x: () => (rtl ? distance() : -distance()),
             ease: 'none',
             scrollTrigger: {
               trigger: wrap,
@@ -86,25 +67,22 @@ export default function Process() {
       })
     }, wrap)
     return () => ctx.revert()
-  }, [])
+  }, [lang])
 
   return (
     <section className="process" id="process" ref={wrapRef}>
       <div className="wrap process-head">
-        <h2 className="sec-h rise">Seven days, start to live</h2>
-        <p className="sec-sub rise">
-          Fixed scope, fixed price, fixed date. The schedule holds because the
-          scope does.
-        </p>
+        <h2 className="sec-h rise">{t.process.title}</h2>
+        <p className="sec-sub rise">{t.process.sub}</p>
       </div>
       <div className="process-rail" aria-hidden="true">
         <span ref={fillRef} />
       </div>
       <div className="ptrack" ref={trackRef}>
-        {STEPS.map((s) => (
+        {t.process.steps.map((s) => (
           <article key={s.day} className="station">
-            <span className="station-day" aria-label={`Day ${Number(s.day)}`}>
-              <em>Day</em>
+            <span className="station-day" aria-label={`${t.process.day} ${Number(s.day)}`}>
+              <em>{t.process.day}</em>
               {s.day}
             </span>
             <h3>{s.title}</h3>

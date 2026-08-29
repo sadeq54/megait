@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 import { getLenis } from '../lib/smoothScroll.js'
-
-const LINKS = [
-  ['#work', 'Work'],
-  ['#services', 'Services'],
-  ['#process', 'Process'],
-  ['#pricing', 'Pricing'],
-]
+import { useI18n } from '../lib/i18n.jsx'
 
 export default function Nav() {
+  const { lang, t, setLang } = useI18n()
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
   const sentinelRef = useRef(null)
+
+  const LINKS = [
+    ['#work', t.nav.work],
+    ['#services', t.nav.services],
+    ['#process', t.nav.process],
+    ['#pricing', t.nav.pricing],
+  ]
 
   // solid state flips via a sentinel at the top of the document, so no
   // scroll listener is ever attached
@@ -60,7 +62,15 @@ export default function Nav() {
           ))}
         </nav>
         <div className="nav-end">
-          <a className="btn btn-primary btn-nav" href="#contact">Start your project</a>
+          <button
+            type="button"
+            className="lang-toggle"
+            onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
+            aria-label={lang === 'en' ? 'التبديل إلى العربية' : 'Switch to English'}
+          >
+            {lang === 'en' ? 'عربي' : 'EN'}
+          </button>
+          <a className="btn btn-primary btn-nav" href="#contact">{t.cta}</a>
           <button
             type="button"
             className="nav-toggle"
@@ -68,7 +78,7 @@ export default function Nav() {
             aria-controls="nav-sheet"
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? 'Close' : 'Menu'}
+            {open ? t.close : t.menu}
           </button>
         </div>
       </header>
@@ -80,7 +90,7 @@ export default function Nav() {
             </li>
           ))}
           <li style={{ '--i': LINKS.length }}>
-            <a href="#contact" onClick={() => setOpen(false)}>Start your project</a>
+            <a href="#contact" onClick={() => setOpen(false)}>{t.cta}</a>
           </li>
         </ul>
         <div className="nav-sheet-foot">hello@megait.com</div>

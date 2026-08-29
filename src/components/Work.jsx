@@ -1,38 +1,19 @@
 import { useEffect, useRef } from 'react'
 import { gsap, ScrollTrigger, reduceMotion } from '../lib/scrollFx.js'
+import { useI18n } from '../lib/i18n.jsx'
 
 /* Pinned split: the title holds the left column while the cases travel
    up the right, each growing and brightening as it arrives. Case faces
    are live screenshots of the shipped sites; every card opens the real
    product. */
 const CASES = [
-  {
-    id: 'kormzi',
-    url: 'https://kormzi.com/',
-    img: '/work/kormzi.jpg',
-    title: 'Kormzi',
-    body: 'Full brand site for a performance affiliate network serving MENA and APAC: 3D hero, pinned case studies, smooth scroll choreography.',
-    facts: ['kormzi.com', 'React + GSAP + Three.js'],
-  },
-  {
-    id: 'gold',
-    url: 'https://goldpricesarabia.com/',
-    img: '/work/gold.jpg',
-    title: 'Gold Prices Arabia',
-    body: 'Bilingual gold-market platform on Next.js: live pricing, i18n routing, SEO engineered for English and Arabic in parallel.',
-    facts: ['goldpricesarabia.com', 'Arabic RTL native'],
-  },
-  {
-    id: 'blk',
-    url: 'https://caffeshop-sadeq.netlify.app/',
-    img: '/work/blk.jpg',
-    title: 'BLK Coffee',
-    body: 'Cinematic scroll-film landing page for a specialty coffee brand: scroll-driven film scrubbing, pinned menu rail, editorial pacing.',
-    facts: ['Live preview', 'React + Lenis'],
-  },
+  { id: 'kormzi', url: 'https://kormzi.com/', img: '/work/kormzi.jpg' },
+  { id: 'gold', url: 'https://goldpricesarabia.com/', img: '/work/gold.jpg' },
+  { id: 'blk', url: 'https://caffeshop-sadeq.netlify.app/', img: '/work/blk.jpg' },
 ]
 
 export default function Work() {
+  const { t, lang } = useI18n()
   const rootRef = useRef(null)
 
   useEffect(() => {
@@ -69,19 +50,17 @@ export default function Work() {
       })
     }, root)
     return () => ctx.revert()
-  }, [])
+  }, [lang])
 
   return (
     <section className="work" id="work" ref={rootRef}>
       <div className="wrap work-split">
         <div className="work-pin">
-          <h2 className="sec-h">Built, shipped, measured</h2>
-          <p className="sec-sub">
-            Live products, not mockups. Every case below opens the real site.
-          </p>
+          <h2 className="sec-h">{t.work.title}</h2>
+          <p className="sec-sub">{t.work.sub}</p>
         </div>
         <div className="work-list">
-          {CASES.map((c) => (
+          {CASES.map((c, i) => (
             <a
               key={c.id}
               className="case"
@@ -90,13 +69,13 @@ export default function Work() {
               rel="noopener noreferrer"
             >
               <div className="case-media">
-                <img src={c.img} alt={`${c.title} website`} loading="lazy" decoding="async" />
+                <img src={c.img} alt={`${t.work.cases[i].title} website`} loading="lazy" decoding="async" />
               </div>
               <div className="case-body">
-                <h3>{c.title}</h3>
-                <p>{c.body}</p>
+                <h3>{t.work.cases[i].title}</h3>
+                <p>{t.work.cases[i].body}</p>
                 <ul className="case-facts">
-                  {c.facts.map((f) => (
+                  {t.work.cases[i].facts.map((f) => (
                     <li key={f}>{f}</li>
                   ))}
                 </ul>

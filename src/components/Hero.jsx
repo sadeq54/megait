@@ -1,11 +1,13 @@
 import { useEffect, useRef } from 'react'
 import { getLenis } from '../lib/smoothScroll.js'
+import { useI18n } from '../lib/i18n.jsx'
 
 /* Autoplay hero, original 1080p bits: the assembly film plays once and
    holds its final frame. The page is scroll-locked until the film ends
    (click skips to the end), with a hard 10s ceiling and every fallback
    path unlocking — the site is never held hostage. */
 export default function Hero() {
+  const { t } = useI18n()
   const videoRef = useRef(null)
   const stageRef = useRef(null)
 
@@ -81,20 +83,18 @@ export default function Hero() {
       <div className="hero-content">
         <div className="hero-top">
           <h1 className="hero-h1 rise-load" style={{ '--l': 0 }}>
-            Digital experiences
+            {t.hero.h1a}
             <br />
-            <em className="accent">engineered to convert.</em>
+            <em className="accent">{t.hero.h1b}</em>
           </h1>
         </div>
         <div className="hero-bottom">
           <p className="hero-sub rise-load" style={{ '--l': 1 }}>
-            MEGA IT designs and engineers high-performance landing pages for
-            ambitious brands. Cinematic motion, measurable speed, delivered in
-            seven business days.
+            {t.hero.sub}
           </p>
           <div className="hero-cta rise-load" style={{ '--l': 2 }}>
-            <a className="btn btn-primary" href="#contact">Start your project</a>
-            <a className="btn btn-ghost" href="#work">View our work</a>
+            <a className="btn btn-primary" href="#contact">{t.cta}</a>
+            <a className="btn btn-ghost" href="#work">{t.seeWork}</a>
           </div>
         </div>
       </div>
