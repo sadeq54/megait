@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useI18n } from '../lib/i18n.jsx'
+import { gsap, ScrollTrigger, reduceMotion } from '../lib/scrollFx.js'
 
 /* Autoplay hero, original 1080p bits: the assembly film plays once and
    holds its final frame. Scroll is NEVER blocked: the film is ambient,
@@ -37,18 +38,48 @@ export default function Hero() {
     return () => stage.removeEventListener('pointerdown', onSkip)
   }, [])
 
+  // sticky parallax exit: the hero pins for one extra viewport of
+  // scroll while the film recedes into a dimming card and the copy
+  // lifts away faster, then the stats band slides over it
+  useEffect(() => {
+    if (reduceMotion()) return
+    const stage = stageRef.current
+    if (!stage) return
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: stage,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.6,
+        },
+      })
+      tl.to('.hero-top', { y: -110, opacity: 0, ease: 'none' }, 0)
+        .to('.hero-bottom', { y: -70, opacity: 0, ease: 'none' }, 0.06)
+        .to('.hero-media-wrap', {
+          scale: 0.9,
+          y: '-5vh',
+          opacity: 0.28,
+          borderRadius: 28,
+          ease: 'none',
+        }, 0.08)
+    }, stage)
+    return () => ctx.revert()
+  }, [])
+
   return (
     <section className="stage hero-stage" id="top" ref={stageRef}>
-      <div className="stage-media">
-        <video
-          ref={videoRef}
-          muted
-          playsInline
-          preload="auto"
-          poster="/film/f1-assembly-poster.jpg"
-        />
-      </div>
-      <div className="hero-content">
+      <div className="hero-pin">
+        <div className="hero-media-wrap stage-media">
+          <video
+            ref={videoRef}
+            muted
+            playsInline
+            preload="auto"
+            poster="/film/f1-assembly-poster.jpg"
+          />
+        </div>
+        <div className="hero-content">
         <div className="hero-top">
           <h1 className="hero-h1 rise-load" style={{ '--l': 0 }}>
             {t.hero.h1a}
@@ -64,6 +95,7 @@ export default function Hero() {
             <a className="btn btn-primary" href="#contact">{t.cta}</a>
             <a className="btn btn-ghost" href="#work">{t.seeWork}</a>
           </div>
+        </div>
         </div>
       </div>
     </section>

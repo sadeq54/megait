@@ -930,3 +930,21 @@ html[lang='ar'] .logo { font-family: var(--display); }
 [dir='rtl'] .station-day { flex-direction: row-reverse; justify-content: flex-end; }
 [dir='rtl'] .tier li { padding-left: 0; padding-right: 22px; }
 [dir='rtl'] .tier li::before { left: auto; right: 0; }
+
+/* ---------- sticky parallax hero exit ---------- */
+/* overflow must stay visible on the tall stage or the sticky pin dies */
+.hero-stage { height: 200vh; overflow: visible; }
+.hero-pin {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow: hidden;
+}
+.hero-media-wrap {
+  transform-origin: 50% 42%;
+  overflow: hidden;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-stage { height: 100dvh; }
+}
