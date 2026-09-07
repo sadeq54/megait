@@ -34,7 +34,7 @@ const DICT = {
       cases: [
         { title: 'Kormzi', body: 'Full brand site for a performance affiliate network serving MENA and APAC: 3D hero, pinned case studies, smooth scroll choreography.', facts: ['kormzi.com', 'React + GSAP + Three.js'] },
         { title: 'Gold Prices Arabia', body: 'Bilingual gold-market platform on Next.js: live pricing, i18n routing, SEO engineered for English and Arabic in parallel.', facts: ['goldpricesarabia.com', 'Arabic RTL native'] },
-        { title: 'BLK Coffee', body: 'Cinematic scroll-film landing page for a specialty coffee brand: scroll-driven film scrubbing, pinned menu rail, editorial pacing.', facts: ['Live preview', 'React + Lenis'] },
+        { title: 'Qahwa BLK', body: 'Arabic-first RTL landing page for a 34 branch specialty coffee chain: a one take opening film that holds the page, a pinned menu rail, and a branch finder that answers in a tap.', facts: ['blk-db6.pages.dev', 'Arabic RTL native'] },
       ],
     },
     process: {
@@ -125,7 +125,7 @@ const DICT = {
       cases: [
         { title: 'Kormzi', body: 'موقع كامل لشبكة تسويق بالأداء تخدم الشرق الأوسط وآسيا: واجهة ثلاثية الأبعاد ودراسات حالة مثبّتة وتمرير سلس.', facts: ['kormzi.com', 'React + GSAP + Three.js'] },
         { title: 'أسعار الذهب أرابيا', body: 'منصة ثنائية اللغة لأسعار الذهب على Next.js: أسعار مباشرة وتوجيه لغوي وSEO مبني للعربية والإنجليزية معاً.', facts: ['goldpricesarabia.com', 'عربي RTL أصيل'] },
-        { title: 'BLK Coffee', body: 'صفحة هبوط سينمائية لعلامة قهوة مختصة: فيلم يُقرأ بالتمرير وقائمة مثبّتة وإيقاع تحريري.', facts: ['معاينة حيّة', 'React + Lenis'] },
+        { title: 'قهوة بلاك', body: 'صفحة هبوط عربية بالكامل لسلسلة قهوة مختصة من 34 فرعاً: فيلم افتتاحي يمسك الصفحة، وقائمة مثبّتة، ودليل فروع يجيب بضغطة واحدة.', facts: ['blk-db6.pages.dev', 'عربي RTL أصيل'] },
       ],
     },
     process: {

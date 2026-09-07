@@ -9,7 +9,7 @@ import { useI18n } from '../lib/i18n.jsx'
 const CASES = [
   { id: 'kormzi', url: 'https://kormzi.com/', img: '/work/kormzi.jpg' },
   { id: 'gold', url: 'https://goldpricesarabia.com/', img: '/work/gold.jpg' },
-  { id: 'blk', url: 'https://caffeshop-sadeq.netlify.app/', img: '/work/blk.jpg' },
+  { id: 'blk', url: 'https://blk-db6.pages.dev/', img: '/work/blk.jpg' },
 ]
 
 export default function Work() {
